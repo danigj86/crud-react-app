@@ -1,10 +1,19 @@
 import React from 'react'
-import { ModalWindow } from './ModalWindow';
+import { ModalEdit } from './ModalEdit';
 
-export const UserList = ({ users, borraUser }) => {
+export const UserList = ({ users, cambiaInput, formState, borraUser, editaUser }) => {
 
     const usuarios = users;
     console.log(usuarios);
+
+    const confirmar = (id)=>{
+        const respuesta = window.confirm('Seguro que deseas borrar este usuario?');
+
+        if (respuesta) {
+            borraUser(id);
+        }
+    }
+
     return (
         <div>
             <h2>Lista usuario</h2>
@@ -27,7 +36,14 @@ export const UserList = ({ users, borraUser }) => {
                             <td>{user.nombre}</td>
                             <td>{user.apellidos}</td>
                             <td>{user.email}</td>
-                            <td><button className="btn btn-warning">Editar</button> <button className="btn btn-danger" onClick={()=>borraUser(user.id)}>Borrar</button></td>
+                            <td><ModalEdit
+                            i={i}
+                            user={user}
+                            cambiaInput={cambiaInput}
+                            formState={formState}
+                            editaUser={editaUser}
+                            />  
+                             <button className="btn btn-danger" onClick={()=>confirmar(user.id)}>Borrar</button></td>
                         </tr>
                         })
                     }

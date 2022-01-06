@@ -1,8 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AddUser } from './components/AddUser';
-import { UserList } from './components/UserList';
 
+import { UserList } from './components/UserList';
 import { ModalWindow } from './components/ModalWindow';
 import { useEffect, useReducer } from 'react';
 import { useForm } from './hooks/useForm';
@@ -25,7 +24,7 @@ function App() {
    */
   const [users, dispatch] = useReducer(userReducer, [], init)
 
-  console.log(users)
+  //console.log(users)
 
   const [formState, cambiaInput, reset] = useForm({
     nombre: '',
@@ -55,7 +54,7 @@ function App() {
     }
 
     const action = {
-      type: 'nuevo',
+      type: 'añadir',
       payload: newUser
     }
     if (formState.nombre === '') {
@@ -82,6 +81,40 @@ function App() {
     dispatch(action);
   }
 
+  const editaUser = (id) => {
+    console.log('EDITADOOO!!')
+
+    const editUser = {
+      id: id,
+      nombre: formState.nombre,
+      apellidos: formState.apellidos,
+      email: formState.email
+    }
+
+    if (formState.nombre === '') {
+      alert('Debes añadir un nombre');
+      return false;
+    }
+    if (formState.apellido === '') {
+      alert('Debes añadir apellidos')
+      return false;
+    }
+    if (formState.email === '') {
+      alert('Debes añadir email')
+      return false;
+    }
+
+    const action = {
+      type: 'editar',
+      payload: editUser,
+    }
+
+    dispatch(action);
+    reset();
+
+
+  }
+
   return (
     <div className="App">
       <div className="row">
@@ -94,8 +127,11 @@ function App() {
         </div>
         <div className="col-md-8">
           <UserList
-          users={users} 
-          borraUser={borraUser}
+            cambiaInput={cambiaInput}
+            formState={formState}
+            users={users}
+            editaUser={editaUser}
+            borraUser={borraUser}
           />
         </div>
       </div>
