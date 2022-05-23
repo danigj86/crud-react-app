@@ -6,7 +6,7 @@ export const UserList = ({ users, cambiaInput, formState, borraUser, editaUser }
     const usuarios = users;
     console.log(usuarios);
 
-    const confirmar = (id)=>{
+    const confirmar = (id) => {
         const respuesta = window.confirm('Seguro que deseas borrar este usuario?');
 
         if (respuesta) {
@@ -30,24 +30,28 @@ export const UserList = ({ users, cambiaInput, formState, borraUser, editaUser }
                 </thead>
                 <tbody>
                     {
-                        usuarios.map((user, i) =>{
-                            return   <tr key={user.id}>
-                            <th >{i+1}</th>
-                            <td>{user.nombre}</td>
-                            <td>{user.apellidos}</td>
-                            <td>{user.email}</td>
-                            <td><ModalEdit
-                            i={i}
-                            user={user}
-                            cambiaInput={cambiaInput}
-                            formState={formState}
-                            editaUser={editaUser}
-                            />  
-                             <button className="btn btn-danger" onClick={()=>confirmar(user.id)}>Borrar</button></td>
-                        </tr>
+                        usuarios.map((user, i) => {
+                            return <tr key={user.id}>
+                                <th >{i + 1}</th>
+                                <td>{user.nombre}</td>
+                                <td>{user.apellidos}</td>
+                                <td>{user.email}</td>
+
+
+                                <td>
+                                    <ModalEdit
+                                        i={i}
+                                        user={user}
+                                        cambiaInput={cambiaInput}
+                                        formState={formState}
+                                        editaUser={editaUser}
+                                    />
+                                    <button className="btn btn-danger" onClick={() => confirmar(user.id)}>Borrar</button>
+                                </td>
+                            </tr>
                         })
                     }
-                  
+
                 </tbody>
             </table>
         </div>

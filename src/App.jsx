@@ -16,12 +16,12 @@ const init = () => {
 
 function App() {
 
-  /*   const dataUsers = [
-      { id: "jkwjk", nombre: "Alfredo", apellidos: "Martinez Rosa", email: "ejemplo1@ejemplo.com" },
-      { id: "jkwew", nombre: "Maria", apellidos: "Julian Matias", email: "ejemplo2@ejemplo.com" },
-      { id: "kmwnw", nombre: "Paco", apellidos: "Rolando Checa", email: "ejemplo3@ejemplo.com" }
-    ];
-   */
+  const dataUsers = [
+    { id: "jkwjk", nombre: "Alfredo", apellidos: "Martinez Rosa", email: "ejemplo1@ejemplo.com" },
+    { id: "jkwew", nombre: "Maria", apellidos: "Julian Matias", email: "ejemplo2@ejemplo.com" },
+    { id: "kmwnw", nombre: "Paco", apellidos: "Rolando Checa", email: "ejemplo3@ejemplo.com" }
+  ];
+
   const [users, dispatch] = useReducer(userReducer, [], init)
 
   //console.log(users)
@@ -36,12 +36,7 @@ function App() {
     localStorage.setItem('usuarios', JSON.stringify(users))
   }, [users])
 
-  /*   const [ formState, cambiaInput, reset] = useForm({
-         name:'', 
-         apellido:'', 
-         email:''
-    }) */
-
+  //agrega user
 
   const agregaUser = () => {
     console.log('agregado')
@@ -69,7 +64,7 @@ function App() {
     dispatch(action);
     reset();
   }
-
+  //borra user
   const borraUser = (id) => {
     console.log(`Borrado el id ${id}`)
 
@@ -80,7 +75,7 @@ function App() {
 
     dispatch(action);
   }
-
+  //edita user
   const editaUser = (id) => {
     console.log('EDITADOOO!!')
 
